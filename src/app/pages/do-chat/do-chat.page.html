@@ -1,0 +1,212 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-thumbnail slot="start" style="margin: 5px;" (click)="viewcontact()">
+      <img class="header" src="{{image}}" (click)="viewInfo()">
+    </ion-thumbnail>
+    <span (click)="viewcontact()" style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">
+      {{nikeName}}
+    </span>
+    <span class="statusOnline" *ngIf="status === onlineStatus" id="UserStatus">{{isOnline}}</span>
+    <span *ngIf="status != onlineStatus" id="UserStatus">{{isOnline | moment:'h:mm A'}}</span>
+    <ion-buttons slot="end">
+      <ion-button (click)="videoCall()">
+        <ion-icon name="videocam"></ion-icon>
+      </ion-button>
+      <ion-button (click)="callPhoneNumber()">
+        <ion-icon name="call"></ion-icon>
+      </ion-button>
+      <ion-button (click)="more($event)">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent class="ion-padding" fullscreen="true" class="contentBg" id="chat-parent"
+  overflow-scroll="true">
+  <div class="style" *ngIf="isLoading">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div>
+    <div id="chat-container">
+      <div class="message-wrap">
+        <div *ngFor="let message of messagesToShow; let i = index; let first = first; let last = last" class="message">
+          <ion-col col-12 class="system" *ngIf="message.type == 'block'">
+            <p>
+              <ion-icon name="lock-closed-outline"></ion-icon>
+              {{message.message}} <br />
+              <span>{{message.date |  moment:'h:mm A'}}</span>
+            </p>
+          </ion-col>
+          <div class="message-left" *ngIf="message.userId === userId">
+            <div *ngIf="message.type == 'image'" (click)="enlargeImage(message.message)"
+              (click)="optionDeleteForMe(message.key)">
+              <div class="msg-detail">
+                <div class="msg-content">
+                  <img class="url" src="{{message.message}}">
+                  <p class="line-time-left ">{{message.date | moment:'h:mm A' }}</p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'text'" (click)="optionDeleteForMe(message.key)">
+              <div class="msg-detail">
+                <div class="msg-content">
+                  <p class="line-breaker-left ">{{message.message}}</p>
+                  <p class="line-time-left ">{{message.date |  moment:'h:mm A' }}</p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'audio'">
+              <div class="msg-detail">
+                <div class="msg-content">
+                  <p class="line-breaker-left">
+                    <span style="display: flex;">
+                      <div (click)="play(message.audio)">
+                        <ion-icon color="primary" slot="icon-only" name="play"></ion-icon>
+                      </div>
+                      <div style="margin-left: 30px;" (click)="optionDeleteForMe(message.key)">
+                        <ion-icon color="primary" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+                      </div>
+                    </span>
+                  </p>
+                  <span class="line-time-left">
+                    {{message.date |  moment:'h:mm A' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message-right" *ngIf="message.userId != userId">
+            <div *ngIf="message.type == 'image'" (click)="optionDelete(message.key)"
+              (click)="enlargeImage(message.message)">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <img class="url" src="{{message.message}}">
+                  <span class="line-time">
+                    {{message.date |  moment:'h:mm A' }}
+                    <svg *ngIf="message.read == 'unread'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                      id="msg-dblcheck-ack" x="2063" y="2076">
+                      <path
+                        d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                        fill="#1e1e1e" />
+                    </svg>
+                    <svg *ngIf="message.read == 'read'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                      id="msg-dblcheck-ack" x="2063" y="2076">
+                      <path
+                        d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                        fill="#6a64ff" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'text'" (click)="optionDelete(message.key)">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <p class="line-breaker ">{{message.message}}</p>
+                  <span class="line-time">
+                    {{message.date |  moment:'h:mm A' }}
+                    <svg *ngIf="message.read == 'unread'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                      id="msg-dblcheck-ack" x="2063" y="2076">
+                      <path
+                        d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                        fill="#1e1e1e" />
+                    </svg>
+                    <svg *ngIf="message.read == 'read'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                      id="msg-dblcheck-ack" x="2063" y="2076">
+                      <path
+                        d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                        fill="#6a64ff" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'audio'">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <p class="line-breaker ">
+                    <span style="display: flex;">
+                      <div (click)="play(message.audio)">
+                        <ion-icon color="primary" slot="icon-only" name="play"></ion-icon>
+                      </div>
+                      <div style="margin-left: 30px;" (click)="optionDelete(message.key)">
+                        <ion-icon color="primary" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+                      </div>
+                    </span>
+                    <span class="line-time">
+                      {{message.date |  moment:'h:mm A' }}
+
+                      <svg *ngIf="message.read == 'unread'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                        id="msg-dblcheck-ack" x="2063" y="2076">
+                        <path
+                          d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                          fill="#1e1e1e" />
+                      </svg>
+                      <!-- </div> -->
+                      <!-- <div > -->
+                      <svg *ngIf="message.read == 'read'" xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                        id="msg-dblcheck-ack" x="2063" y="2076">
+                        <path
+                          d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                          fill="#6a64ff" />
+                      </svg>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container *ngIf="message;  else running ">
+      <ion-fab-button color="secondary" (click)="sendMessage()" [disabled]="!message" *ngIf="!this.blocks">
+        <ion-icon name="send" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="secondary" (click)="sendMessageOption()" [disabled]="!message" *ngIf="this.blocks">
+        <ion-icon name="send" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+
+    <ng-template #running>
+      <ion-fab-button color="secondary" (click)="record()" *ngIf="!recording">
+        <ion-icon name="mic" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="secondary" (click)="stopRec()" *ngIf="recording">
+        <ion-icon name="pause-circle" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-template>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-row class="ion-no-padding; align-items-center">
+    <ion-col size="2">
+      <ion-button fill="clear" class="msg-btn" *ngIf="!this.blocks" (click)="sendPhoto()">
+        <ion-icon slot="icon-only" name="images-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="msg-btn" *ngIf="this.blocks" (click)="sendPhotoOption()">
+        <ion-icon slot="icon-only" name="images-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="10">
+      <textarea class="message-input" placeholder="Type your message" [(ngModel)]="message"></textarea>
+    </ion-col>
+  </ion-row>
+</ion-footer>

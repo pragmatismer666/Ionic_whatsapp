@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>People</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="term" placeholder="Search people"></ion-searchbar>
+
+
+  <ion-list *ngFor="let account of accounts | filter:term">
+    <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+      (click)="chat(account.userId)">
+      <div class="profileimage">
+        <img src="{{account.img}}" />
+      </div>
+      <ion-label style="font-weight: 600; padding-left: 10px;">
+        <span style="font-size:16px; text-transform: capitalize;">
+          {{account.nikeName}}
+        </span>
+        <span style="display: flex;margin-top: 6px;">
+          <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+            {{account.description}}
+          </span>
+        </span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

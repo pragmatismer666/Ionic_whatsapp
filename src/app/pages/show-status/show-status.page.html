@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border" no-border>
+  <div class="progress">
+    <!-- <div class="bar" id="myBar"></div> -->
+    <ion-progress-bar [value]="progress"></ion-progress-bar>
+  </div>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-thumbnail slot="start" style="margin: 5px;">
+      <img class="header" src="{{image}}">
+    </ion-thumbnail>
+    <span style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">
+      {{username}}
+    </span>
+    <span id="UserStatus">{{date |  moment:'h:mm A'}}</span>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <img src="{{imagePost}}" (click)="back()"/>
+  </div>
+</ion-content>

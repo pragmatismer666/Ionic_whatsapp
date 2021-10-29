@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Make call</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of accounts">
+    <ion-item *ngIf="item.userId != currentUserId">
+      <div class="profileimage">
+        <img src="{{item.img}}" />
+      </div>
+      <ion-label style="font-weight: 600; padding-left: 10px;">
+        <span style="font-size:16px; text-transform: capitalize;">
+          {{item.nikeName}}
+        </span>
+        <span style="display: flex;margin-top: 6px;">
+          <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+            {{item.description}}
+          </span>
+        </span>
+      </ion-label>
+      <ion-icon color="secondary" name="call" slot="end" (click)="call(item)"></ion-icon>
+      <ion-icon color="secondary" name="videocam" slot="end" (click)="videoCall(item)"></ion-icon>
+    </ion-item>
+  </div>
+
+</ion-content>

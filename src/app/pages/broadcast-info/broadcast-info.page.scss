@@ -1,0 +1,42 @@
+ion-card {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    position: relative;
+    top: 50px;
+    padding-top: 20px;
+}
+
+ion-icon {
+    font-size: x-large;
+    padding: 10px;
+}
+div.profileimage {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    img {
+        height: 6pc;
+        padding: 2px;
+    }
+}
+
+.thumnails {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    .list-thumbnail {
+        height: 100%;
+        white-space: nowrap;
+        .img-thumb {
+            display: inline-block;
+        }
+    }
+}
+
+.adminColor {
+    border: solid 2px var(--ion-color-primary);
+    border-radius: 6px;
+    padding: 1px;
+    color: var(--ion-color-primary);
+}

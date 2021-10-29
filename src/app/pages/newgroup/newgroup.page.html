@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div style="padding-left: 5px;">
+      <span style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">New group</span>
+      <div *ngIf="!processe">
+        <div *ngIf="groupMembers.length <= 1">
+          <span>Add participants</span>
+        </div>
+        <div *ngIf="groupMembers.length >= 2">
+          <ion-label class="ion-text-center">Group Members ({{groupMembers.length}})</ion-label>
+        </div>
+      </div>
+      <div *ngIf="processe">
+        <span>Add subject</span>
+      </div>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!processe" style="padding-top: 10px; padding-bottom: 20px;">
+    <div class="groupAdded">
+      <!-- Members -->
+      <!-- <ion-item lines="none" *ngIf="groupMembers">
+      </ion-item> -->
+      <div class="thumnails" *ngIf="groupMembers">
+        <div class="list-thumbnail">
+          <div class="img-thumb" *ngFor="let member of groupMembers" (click)="removeFromGroup(member)">
+            <ion-avatar>
+              <img [src]="member.img" />
+            </ion-avatar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ion-list *ngFor="let account of accounts">
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        *ngIf="!inGroup(account)" (click)="addToGroup(account); $event.stopPropagation();">
+        <div class="profileimage">
+          <img src="{{account.img}}" alt="">
+        </div>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{account.nikeName}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{account.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        *ngIf="inGroup(account)" (click)="removeFromGroup(account); $event.stopPropagation();">
+        <div class="profileimage">
+          <img src="{{account.img}}" alt="">
+          <ion-icon slot="start" name="checkmark-circle" color="primary"
+            style="margin-bottom:0 !important;margin-left:29px !important;margin-top:33px !important; position: absolute; font-size: x-large;">
+          </ion-icon>
+        </div>
+
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{account.nikeName}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{account.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!processe">
+    <ng-container>
+      <ion-fab-button (click)="presentToast()">
+        <ion-icon expand="icon-only" name="arrow-forward-outline"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+  <div *ngIf="processe">
+    <div style="padding-top: 10px;">
+      <form [formGroup]="formGroup">
+        <ion-item lines="none">
+          <div class="headers">
+            <img src="assets/camera.png" *ngIf="group.img == ''" (click)="setGroupPhoto()">
+            <img src="{{group.img}}" *ngIf="group.img != ''" (click)="setGroupPhoto()">
+          </div>
+
+          <ion-item>
+            <ion-input type="text" formControlName="name" placeholder="Type group sub here" [(ngModel)]="groupName">
+            </ion-input>
+            <ion-icon slot="end" src="assets/smile.svg"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <p style="text-align: center;">Provide a group subject and optional group icon</p>
+        <ion-fab vertical="top" horizontal="end" slot="fixed">
+          <ng-container>
+            <ion-fab-button style="margin-top: 6pc;" [disabled]="!formGroup.valid" (click)="newGroup()">
+              <ion-icon expand="icon-only" name="checkmark"></ion-icon>
+            </ion-fab-button>
+          </ng-container>
+        </ion-fab>
+      </form>
+    </div>
+
+    <div class="backgrondColor">
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="4" *ngFor="let account of groupMembers">
+            <div class="img-wrapper" [style.background-image]="'url('+ account.img +')'">
+            </div>
+            <div class="usernameView">{{account.nikeName}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

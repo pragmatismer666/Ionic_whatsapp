@@ -1,0 +1,86 @@
+<ion-header parallax imageUrl="{{image}}" maximumHeight="350" expandedColor="#AAA" titleColor="white">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{nikeName}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label>Mute notifications</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Custom notifications</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Media visibility</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Encryption</ion-label>
+      <ion-icon color="secondary" name="lock-closed" slot="end"></ion-icon>
+      <ion-label>Message to this chat and calls are secured with end-to-end encryption. Tap to verify</ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle color="secondary">About and phone number</ion-card-subtitle>
+      <ion-card-title>{{description}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{dateDec |  moment:'h:mm A'}}
+    </ion-card-content>
+    <ion-item>
+      <ion-label (click)="back()">{{phoneNumber}}
+        <p>Mobile</p>
+      </ion-label>
+      <ion-label>
+        <div style="float: right;">
+          <ion-icon slot="icon-only" color="secondary" (click)="back()" name="chatbox-ellipses"></ion-icon>
+          <ion-icon slot="icon-only" color="secondary" name="call" (click)="calls()"></ion-icon>
+          <ion-icon slot="icon-only" color="secondary" name="videocam" (click)="videoCall()"></ion-icon>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle color="secondary">Other phones</ion-card-subtitle>
+    </ion-card-header>
+    <ion-item>
+      <ion-label (click)="back()" >{{phoneNumber}}
+        <p>Mobile</p>
+      </ion-label>
+      <ion-label>
+        <div style="float: right;">
+          <ion-icon slot="icon-only" color="secondary" (click)="back()" name="chatbox-ellipses"></ion-icon>
+          <ion-icon slot="icon-only" color="secondary" name="call" (click)="calls()"></ion-icon>
+          <ion-icon slot="icon-only" color="secondary" name="videocam" (click)="videoCall()"(click)="videoCall()"></ion-icon>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+      <ion-button *ngIf="!isBlock" (click)="block()" color="danger" fill="clear">Block
+        <ion-icon slot="start" color="danger" src="assets/icon/block.svg"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isBlock" (click)="unBlock()" color="medium" fill="clear">UnBlock
+        <ion-icon slot="start" color="medium" src="assets/icon/block.svg"></ion-icon>
+      </ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-button (click)="report()" color="danger" fill="clear">Report contact
+      <ion-icon slot="start" color="danger" src="assets/icon/dislike.svg"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+
+</ion-content>

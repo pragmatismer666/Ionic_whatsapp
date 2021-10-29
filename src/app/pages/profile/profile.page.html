@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+   <ion-buttons slot="start">
+     <ion-back-button></ion-back-button>
+   </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="profileimage">
+    <img src="{{image}}" alt="" (click)="cameraOption()">
+  </div>
+
+  <ion-item lines="none">
+    <ion-icon slot="start" color="secondary" name="person" class="settingsIcons"></ion-icon>
+    <ion-icon slot="end" name="pencil" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">Name
+      <p>{{nikeName}}</p>
+      <p>this is not your username or pin, this name will be visible to your WhatsApp contacts</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" (click)="changeDescription()">
+    <ion-icon slot="start" color="secondary" name="alert-circle-outline" class="settingsIcons"></ion-icon>
+    <ion-icon slot="end" name="pencil" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">About
+      <p>{{description}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-icon slot="start" color="secondary" name="call" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">Phone
+      <p>+2348034524290</p>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

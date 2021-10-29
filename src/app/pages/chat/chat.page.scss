@@ -1,0 +1,51 @@
+ion-fab {
+  bottom: 20px !important;
+  right: 15px !important;
+}
+.scroll-content {
+  padding-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+ion-title {
+  font-size: medium;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+ion-fab-button {
+  color: #25d366;
+}
+
+.style {
+  text-align: center;
+  margin: 0px auto;
+  color: var(--ion-color-primary);
+  padding-top: 20px;
+}
+
+.thumnail {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  text-align: center;
+  .list-thumbnail {
+    height: 100%;
+    white-space: nowrap;
+    .img-thumb {
+      display: inline-block;
+      border-radius: 4px;
+      width: 50px;
+      margin: 0 -5px 0 0;
+      line-height: 60px;
+    }
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+.button {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 15px;
+  bottom: 0;
+}

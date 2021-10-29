@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="name === 'dec'">Group description</ion-title>
+    <ion-title *ngIf="name === 'name'">Enter new subject</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="formGroup" >
+
+    <ion-item *ngIf="name === 'name'">
+      <ion-input type="text" formControlName="name" value="{{groupName}}" placeholder="subjetc...."
+        [(ngModel)]="changeName">
+      </ion-input>
+      <ion-icon slot="end" src="assets/smile.svg"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="name === 'dec'">
+      <ion-input type="text" formControlName="dec" placeholder="Add group description" [(ngModel)]="description">
+      </ion-input>
+      <ion-icon slot="end" src="assets/smile.svg"></ion-icon>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="back()" expand="block" fill="clear" shape="round">
+          Cancel
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="saveChanges()" expand="block" fill="clear" shape="round">
+          Ok
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+</ion-footer>

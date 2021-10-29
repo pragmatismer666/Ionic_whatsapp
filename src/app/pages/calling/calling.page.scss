@@ -1,0 +1,17 @@
+div.profileimage {
+    padding: 3px;
+    display: flex;
+    padding-top: 25px;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    img {
+        width: 30%;
+        height: 100%;
+        border-radius: 100%;
+    }
+}
+ion-fab {
+    padding-bottom: 50px;
+}

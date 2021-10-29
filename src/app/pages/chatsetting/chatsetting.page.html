@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-label color="secondary" style="font-weight: bold;">Display</ion-label>
+  </div>
+  <ion-item lines="none">
+    <ion-label>Themes</ion-label>
+    <ion-icon slot="start" color="secondary" name="sunny" class="settingsIcons"></ion-icon>
+    <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
+  </ion-item>
+
+  <ion-item lines="none" (click)="toastShow()">
+    <ion-icon slot="start" color="secondary" name="image" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">Wallpaper
+    </ion-label>
+  </ion-item>
+
+  <div class="splitter"></div>
+  <div class="ion-padding">
+    <ion-label color="secondary" style="font-weight: bold;">Chat settings</ion-label>
+  </div>
+  <ion-item>
+    <ion-label class="paddingleft">Enter is send
+      <p>Enter key will be send your message</p>
+    </ion-label>
+    <ion-toggle slot="end"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="paddingleft">Media visibility
+      <p>Show newly download media in your photo's gallery</p>
+    </ion-label>
+    <ion-toggle slot="end"></ion-toggle>
+  </ion-item>
+
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding-top: 20px;">
+    <ion-item lines="none" (click)="toastShow()">
+      <ion-icon slot="start" color="secondary" name="lock-closed" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Privacy
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" (click)="security()">
+      <ion-icon slot="start" color="secondary" name="key" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Security
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" (click)="toastShow()">
+      <ion-icon slot="start" color="secondary" name="chatbox-ellipses" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Tow-step verification
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" (click)="changeNumber()">
+      <ion-icon slot="start" color="secondary" name="exit" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Change number
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" (click)="reqestInfo()">
+      <ion-icon slot="start" color="secondary" name="document" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Request account info
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" (click)="deleteAccount()">
+      <ion-icon slot="start" color="secondary" name="trash" class="settingsIcons"></ion-icon>
+      <ion-label class="settingsText">Delete my account
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+</ion-content>

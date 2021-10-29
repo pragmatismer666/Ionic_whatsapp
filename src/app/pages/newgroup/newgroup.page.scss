@@ -1,0 +1,68 @@
+.thumnails {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    .list-thumbnail {
+        height: 100%;
+        white-space: nowrap;
+        .img-thumb {
+            display: inline-block;
+            border-radius: 4px;
+            width: 50px;
+            margin: 0 15px 0 0;
+            line-height: 60px;
+        }
+    }
+}
+::-webkit-scrollbar {
+    display: none;
+}
+ion-content ion-toolbar {
+    --background: translucent;
+}
+.usernameView {
+    text-align: center;
+    font-size: small;
+    font-weight: bolder;
+}
+div.profileimage {
+    padding: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    img {
+        height: 50px;
+        width: 58px;
+        border-radius: 100%;
+    }
+}
+
+div.headers {
+    padding: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    img {
+        height: 50px;
+        width: 58px;
+        border-radius: 100%;
+    }
+}
+
+.backgrondColor {
+    padding-top: 10px;
+    background: #dbdada;
+    height: 80vh;
+}
+
+.img-wrapper {
+    min-height: 100px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+}
+

@@ -1,0 +1,47 @@
+
+div.profileimage {
+    padding: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    img {
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+    }
+}
+
+.settingsIcons {
+    font-size: 2em !important;
+}
+.settingsText {
+    margin-top: 5px;
+    width: 100%;
+}
+.buttons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 15px;
+    bottom: 0;
+}
+
+ion-item {
+    padding-bottom: 20px;
+}
+.settingsItems {
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+.splitter {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin-bottom: 20px;
+    background: #ccc;
+    margin-top: 10px;
+}

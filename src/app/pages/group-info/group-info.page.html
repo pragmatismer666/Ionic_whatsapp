@@ -1,0 +1,124 @@
+<ion-header parallax imageUrl="{{group.img}}" maximumHeight="350" expandedColor="#AAA" titleColor="white">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="addMembers()" *ngIf="isAdmin">
+        <ion-icon slot="icon-only" name="person-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">{{group.name}}</span>
+    </ion-title>
+    <span style="padding-left: 19px;">Created by {{group.createdBy }} , {{ group.dateCreated | moment:'h:mm A'}}</span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card (click)="changeGroupInfoDec()">
+    <ion-card-header>
+      <ion-card-title>Add group description</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card (click)="addMembers()" *ngIf="isAdmin">
+    <ion-card-header>
+      <ion-card-title>Add members</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card (click)="changeGroupInfoName()">
+    <ion-card-header>
+      <ion-card-title>Change group name</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card (click)="changeGroupInfoPhoto()">
+    <ion-card-header>
+      <ion-card-title>Change group photo</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <span style="padding-left: 10px; color: var(--ion-color-primary); font-size: larger;">Media</span>
+    <div class="thumnails">
+      <div class="list-thumbnail">
+        <ion-row>
+          <ion-col size="6">
+            <div class="img-thumb" *ngFor="let item of Gallery">
+              <div class="profileimage">
+                <img src="{{item.message}}" alt="">
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label>Mute notifications</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Custom notifications</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Media visibility</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Encryption</ion-label>
+      <ion-icon color="secondary" name="lock-closed" slot="end"></ion-icon>
+      <ion-label>Message to this chat and calls are secured with end-to-end encryption. Tap to verify</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-label>
+        <span style="padding-left: 10px; color: var(--ion-color-secondary);">{{members}} participate</span>
+      </ion-label>
+      <ion-item *ngFor="let member of groupMembers" (click)="assignAdmin(member)"
+        style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;">
+        <ion-avatar>
+          <img src="{{member.img}}">
+        </ion-avatar>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{member.nikeName}}
+          </span>
+          <span *ngIf="isAdminOrNotAdmin(member)" style="float:right;font-size:12px;opacity: 0.7;">
+            <div class="adminColor">
+              Group Admin
+            </div>
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{member.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-button (click)="exit()" color="danger" fill="clear">Exit group
+      <ion-icon slot="start" color="danger" name="exit-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-button color="danger" fill="clear">Report group
+      <ion-icon slot="start" color="danger" src="assets/icon/dislike.svg"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+
+</ion-content>

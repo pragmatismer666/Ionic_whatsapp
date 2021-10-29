@@ -1,0 +1,7 @@
+{
+  "name": "whatsappClone",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

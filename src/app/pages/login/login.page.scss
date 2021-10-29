@@ -1,0 +1,32 @@
+.label {
+    text-align: center;
+    font-size: larger;
+    font-weight: 800;
+    margin: 15px;
+    color: #4d9061;
+    // font-family: sans-serif;
+}
+.p {
+    text-align: center;
+    font-size: medium;
+    padding-top: 15px;
+}
+hr {
+    background: #4d9061;
+}
+
+.button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 15px;
+    bottom: 0;
+}
+
+hr.hr {
+    background: #4d9061;
+    width: 180px;
+}
+.label {
+    font-size: small;
+  }

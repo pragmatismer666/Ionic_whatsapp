@@ -1,0 +1,153 @@
+<ion-content>
+  <div *ngIf="conversations.length == 0">
+    <div style="padding-top: 50%;">
+      <div class="thumnail">
+        <div class="list-thumbnail">
+          <div class="img-thumb" *ngFor="let user of userList">
+            <ion-avatar>
+              <img [src]="user.img" />
+            </ion-avatar>
+          </div>
+        </div>
+      </div>
+      <p style="text-align: center;"> Chat with the current user from firebase build by <strong>Pagas</strong>
+      </p>
+    </div>
+
+    <div class="button">
+      <p color="secondary" style="font-size: larger; font-style: normal; font-weight: bolder;">
+        Start a chat
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </p>
+    </div>
+  </div>
+  <div class="style" *ngIf="isLoading">
+    <ion-spinner color="secondary" name="bubbles"></ion-spinner>
+  </div>
+  <ion-list *ngFor="let item of Conversations">
+
+    <div *ngIf="item.view == 'group'">
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        (click)="groupChat(item.groupKey)">
+        <ion-avatar>
+          <img src="{{item.groupImage || img}}">
+        </ion-avatar>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{item.groupName}}
+          </span>
+          <span style="float:right;font-size:12px;opacity: 0.7;">
+            {{item.date | moment:'h:mm A'}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'text'">
+              {{item.groupMessage}}
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type === 'image'">
+              <ion-icon slot="start" name="camera"></ion-icon>Photo
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'audio'">
+              <ion-icon slot="start" name="mic"></ion-icon>Voice
+            </span>
+          </span>
+          <span style="display: flex;margin-top: -20px; float: right;">
+            <div *ngIf="item.unreadGroupCount >= 1">
+              <p style="float:right;font-size:12px;opacity: 0.7;">
+                <ion-badge color="primary" mode="ios">{{item.unreadGroupCount}}</ion-badge>
+              </p>
+            </div>
+          </span>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="item.view == 'chat'">
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        (click)="doChat(item.userId)">
+        <ion-avatar>
+          <img src="{{item.img}}">
+        </ion-avatar>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{item.nikeName}}
+          </span>
+          <span style="float:right;font-size:12px;opacity: 0.7;">
+            {{item.date | moment:'h:mm A'}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <div *ngIf="item.me == 'me'">
+              <div *ngIf="item.read == 'read'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck" x="2047" y="2061">
+                  <path
+                    d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                    fill="#6a64ff" />
+                </svg>
+              </div>
+              <div *ngIf="item.read == 'unread'">
+                <ion-icon slot="icon-only" class="iconsRead" name="checkmark-done-outline"></ion-icon>
+              </div>
+            </div>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'text'">
+              {{item.message}}
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'image'">
+              <ion-icon slot="start" name="camera"></ion-icon>Photo
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'audio'">
+              <ion-icon slot="start" name="mic"></ion-icon>Voice
+            </span>
+          </span>
+          <span style="display: flex;margin-top: -20px; float: right;" *ngIf="item.me != 'me' ">
+            <div *ngIf="item.read == 'unread'">
+              <p style="float:right;font-size:12px;opacity: 0.7;">
+                <ion-badge color="primary" mode="ios">{{item.unreadMessagesCount}}</ion-badge>
+              </p>
+            </div>
+          </span>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="item.view == 'broadcast'">
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        (click)="broadcast(item.groupKey)">
+        <ion-avatar>
+          <img src="{{item.groupImage || img}}">
+        </ion-avatar>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{item.groupName}}
+          </span>
+          <span style="float:right;font-size:12px;opacity: 0.7;">
+            {{item.date | moment:'h:mm A'}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'text'">
+              {{item.groupMessage}}
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'image'">
+              <ion-icon slot="start" name="camera"></ion-icon>Photo
+            </span>
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;" *ngIf="item.type == 'audio'">
+              <ion-icon slot="start" name="mic"></ion-icon>Voice
+            </span>
+          </span>
+          <span style="display: flex;margin-top: -20px; float: right;">
+            <div *ngIf="item.unreadGroupCount >= 1">
+              <p style="float:right;font-size:12px;opacity: 0.7;">
+                <ion-badge color="primary" mode="ios">{{item.unreadGroupCount}}</ion-badge>
+              </p>
+            </div>
+          </span>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container>
+      <ion-fab-button (click)="userpagas()">
+        <ion-icon name="chatbox-ellipses" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+
+</ion-content>

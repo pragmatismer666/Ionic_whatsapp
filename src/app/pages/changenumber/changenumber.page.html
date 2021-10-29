@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Change number</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profileimage">
+    <img src="assets/images/number.png" alt="">
+  </div>
+  <div class="ion-padding">
+    <h6>
+      Changing your phone number will migrate your account info, groups & settings.
+    </h6>
+    <p>
+      Before proceeding, please confirm that you are able to receive SMS or calls at your new number.
+      <br>
+      if you have both a new phone # a new number, first change your number on your old phone.
+    </p>
+  </div>
+  
+  <div class="buttons">
+    <ion-button expand="block" (click)="toastShow()">
+      NEXT
+    </ion-button>
+  </div>
+
+</ion-content>

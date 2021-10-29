@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div style="padding-left: 5px;">
+      <span style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">Edit recipients</span>
+      <ion-label class="ion-text-center">{{members + membersUpdate.length}} of 256 selected</ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="padding-top: 10px; padding-bottom: 20px;">
+    <div class="groupAdded">
+      <div class="thumnails" *ngIf="memberslist">
+        <div class="list-thumbnail">
+          <div class="img-thumb" *ngFor="let member of memberslist" (click)="removeFromGroup(member)">
+            <ion-avatar>
+              <img [src]="member.img" />
+            </ion-avatar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-list *ngFor="let account of accounts">
+    <div *ngIf="account.userId != userId ">
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        *ngIf="!isMember(account)" (click)="addToGroup(account); $event.stopPropagation();">
+        <div class="profileimage">
+          <img src="{{account.img}}" alt="">
+        </div>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{account.nikeName}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{account.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+      <ion-item style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;"
+        *ngIf="isMember(account)" (click)="removeFromGroup(account); $event.stopPropagation();">
+        <div class="profileimage">
+          <img src="{{account.img}}" alt="">
+          <ion-icon slot="start" name="checkmark-circle" color="primary"
+            style="margin-bottom:0 !important;margin-left:21px !important;margin-top:13px !important; position: absolute; font-size: x-large;">
+          </ion-icon>
+        </div>
+
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{account.nikeName}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{account.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container>
+      <ion-fab-button (click)="update()">
+        <ion-icon expand="icon-only" name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+
+</ion-content>

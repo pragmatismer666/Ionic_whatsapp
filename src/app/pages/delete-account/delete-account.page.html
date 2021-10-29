@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Delete my account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <ion-icon name="newspaper" slot="start"></ion-icon>
+    <ion-label style="font-weight: 600; padding-left: 10px;">
+      <span style="font-size:16px; text-transform: capitalize;">
+        Deleting your account will:
+      </span>
+      <span style="display: flex;margin-top: 6px;">
+        <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+          <p>.Delete your account from WhatsApp from pagas</p>
+          <p>.Erase your message history</p>
+          <p>.Delete you from all of your WhatsApp, groups</p>
+        </span>
+
+      </span>
+    </ion-label>
+  </div>
+
+  <div style="padding: 10px; padding-top: 20%;">
+    <ion-icon name="newspaper" slot="start"></ion-icon>
+    <span style="font-size:16px; text-transform: capitalize; padding: 10px;">
+      Change number instead?
+    </span>
+    <ion-button (click)="change()" expand="block" color="primary">
+      CHANGE NUMBER
+    </ion-button>
+  </div>
+
+
+  <ion-item lines="none" style="text-align: center; padding-top: 20%;">
+    <ion-input [(ngModel)]="phoneNumber" type="text" placeholder="e.g +2348034524290">
+    </ion-input>
+  </ion-item>
+
+  <ion-button (click)="delete()" expand="block" color="danger">
+    DELETE MY ACCOUNT
+  </ion-button>
+
+
+</ion-content>

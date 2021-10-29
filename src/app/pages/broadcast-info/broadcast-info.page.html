@@ -1,0 +1,68 @@
+<ion-header parallax imageUrl="{{broadcastImage}}" maximumHeight="350" expandedColor="#AAA" titleColor="white">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="addMembers()">
+        <ion-icon slot="icon-only" name="person-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">{{broadcastName}}</span>
+    </ion-title>
+    <span style="padding-left: 15px;">Created {{ broadcastDate | moment:'h:mm A'}}</span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>  
+  <ion-card (click)="addMembers()">
+    <ion-card-header>
+      <ion-card-title>Add members</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>Encryption</ion-label>
+      <ion-icon color="secondary" name="lock-closed" slot="end"></ion-icon>
+    </ion-item>
+    <ion-card-content>
+      Messages to this broadcast list are secured with end-to-end encryption. Tap to more info
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-list>
+      <ion-label>
+        <span style="padding-left: 10px; color: var(--ion-color-secondary);">{{members}} recipients</span>
+      </ion-label>
+      <ion-item *ngFor="let member of broadcastMembers"
+        style="background-color:transparent !important; padding-left:0 !important; margin-left:0 !important;">
+        <ion-avatar>
+          <img src="{{member.img}}">
+        </ion-avatar>
+        <ion-label style="font-weight: 600; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{member.nikeName}}
+          </span>
+          <span style="display: flex;margin-top: 6px;">
+            <span style="opacity: 0.6;font-size: 13px;margin-left: 2px;">
+              {{member.description}}
+            </span>
+          </span>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-button (click)="deleteBroadcast()" color="danger" fill="clear">Delete broadcast list
+      <ion-icon slot="start" color="danger" name="trash"></ion-icon>
+    </ion-button>
+  </ion-card>
+</ion-content>

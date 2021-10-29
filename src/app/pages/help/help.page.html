@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding-bottom: 25px;"></div>
+  <ion-item lines="none" (click)="toastShow()">
+    <ion-icon slot="start" color="secondary" name="help-circle-outline" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">FAQ
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" (click)="mail()">
+    <ion-icon slot="start" color="secondary" r="secondLevelGreen" name="people" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">Contact us
+      <p>Question? Need hlep?</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" (click)="toastShow()">
+    <ion-icon slot="start" color="secondary" name="document" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">Terms and Privacy Policy
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" (click)="appInfo()">
+    <ion-icon slot="start" color="secondary" name="information-circle-outline" class="settingsIcons"></ion-icon>
+    <ion-label class="settingsText">App info
+    </ion-label>
+  </ion-item>
+</ion-content>

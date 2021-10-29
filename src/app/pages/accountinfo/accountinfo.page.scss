@@ -1,0 +1,17 @@
+ion-content {
+    --background: #101d24 url("/../assets/images/info.png");
+}
+div.profileimage {
+    padding: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    img {
+        width: 30%;
+        height: 100%;
+        border-radius: 100%;
+    }
+}
+

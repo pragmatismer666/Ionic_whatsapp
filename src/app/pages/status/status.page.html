@@ -1,0 +1,68 @@
+<ion-content>
+  <ion-item lines="none">
+    <div class="profileimage">
+      <img src="{{image}}" alt="">
+      <ion-icon st slot="start" name="add-circle" color="primary"
+        style="margin-bottom:0 !important;margin-left:21px !important;margin-top:13px !important; position: absolute; font-size: x-large;">
+      </ion-icon>
+    </div>
+    <ion-label style="font-weight: bold; padding-left: 10px;">
+      <span style="font-size:16px">
+        My status
+      </span>
+      <p style="color:#ccc;">
+        Tap to add status update
+      </p>
+    </ion-label>
+  </ion-item>
+  <ion-list *ngIf="storypost.length >= 1">
+    <p class="statusTitleLabel">Recent updates</p>
+    <div *ngFor="let story of storypost"
+      style="background-color:transparent !important;padding-left:0 !important;margin-left:0 !important;">
+      <ion-item *ngIf="!story.isView" (click)="viewStory(story)" lines="none">
+        <ion-avatar>
+          <img class="profile" src="{{story.image}}" alt="">
+        </ion-avatar>
+        <ion-label style="font-weight: bold; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{story.name}}
+          </span>
+          <p style="color:#ccc;">
+            {{story.date | moment:'h:mm A'}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-list>
+
+    <p class="statusTitleLabel" *ngIf="storypost.postBy != userId">Viewed updates</p>
+    <div *ngFor="let story of storypost"
+      style="background-color:transparent !important;padding-left:0 !important;margin-left:0 !important;">
+      <ion-item *ngIf="story.isView" (click)="viewStoryView(story)" lines="none">
+        <ion-avatar>
+          <img src="{{story.image}}" alt="">
+        </ion-avatar>
+
+        <ion-label style="font-weight: bold; padding-left: 10px;">
+          <span style="font-size:16px; text-transform: capitalize;">
+            {{story.name}}
+          </span>
+          <p style="color:#ccc;">
+            {{story.date |  moment:'h:mm A'}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container>
+      <ion-fab-button (click)="postStory()">
+        <ion-icon name="camera" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+
+
+</ion-content>

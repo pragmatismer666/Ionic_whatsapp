@@ -1,0 +1,82 @@
+<ion-content class="ion-padding">
+    <div id="recaptcha-container" style="display: none;"></div>
+
+    <div *ngIf="!otpSent">
+        <div class="label">
+            <ion-label>Enter your phone number</ion-label>
+        </div>
+        <div>
+            <p class="p">
+                WhatsApp will send an SMS message to verify your phone number.
+                <span style="color: rgb(98, 98, 243);">What's my number?</span>
+            </p>
+        </div>
+        <div style="margin: 20px;">
+            <div class="input">
+                <form [formGroup]="phone">
+                    <ion-item lines="none" style="text-align: center;">
+                        <ion-select placeholder="code" formControlName="code" [(ngModel)]="countryCodes">
+                            <ion-label style="font-size: smaller;">SELECT YOUR COUNTRY</ion-label>
+                            <ion-select-option *ngFor="let code of countryCode">{{code.dial_code}}
+                            </ion-select-option>
+                        </ion-select>
+                        <ion-input [(ngModel)]="phoneNumber" type="text" style="text-align: start;" formControlName="inputNumber"
+                            placeholder="8034524290"></ion-input>
+                    </ion-item>
+                </form>
+                <hr>
+                <div>
+                    <p style="text-align: center;">
+                        Carrier SMS changes may apply
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <ion-button expand="block" (click)="presentAlertConfirm()" [disabled]="!phone.valid">
+                NEXT
+            </ion-button>
+        </div>
+    </div>
+
+    <div *ngIf="otpSent">
+        <div class="label">
+            <ion-label>Verify {{phoneNumber}}</ion-label>
+        </div>
+        <div>
+            <p class="p">
+                Waiting to automatically detect an SMS sent to {{phoneNumber}}
+                <span style="color: rgb(98, 98, 243);" (click)="clear()">Wrong number?</span>
+            </p>
+        </div>
+        <div style="margin: 20px;">
+            <div class="input">
+                <ion-item lines="none" style="text-align: center;">
+                    <ion-input placeholder="-- -- -- -- -- -- " [(ngModel)]="otp"></ion-input>
+                </ion-item>
+                <hr class="hr">
+                <div>
+                    <p style="text-align: center;">
+                        Enter 6-digit code
+                    </p>
+                </div>
+            </div>
+        </div>
+        <ion-item (click)="ResendSMS()" style="padding-bottom: 5px;">
+            <ion-icon name="chatbox-ellipses" slot="start"></ion-icon>
+            <ion-label>Resend SMS</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="padding-top: 5px;">
+            <ion-icon name="call" slot="start"></ion-icon>
+            <ion-label>Call me</ion-label>
+        </ion-item>
+        <div class="button">
+            <ion-button expand="block" (click)="initia()">
+                Verify
+            </ion-button>
+        </div>
+    </div>
+
+
+
+</ion-content>

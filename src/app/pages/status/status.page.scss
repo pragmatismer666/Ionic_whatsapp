@@ -1,0 +1,58 @@
+// ion-fab {
+//     right: 15px !important;
+// }
+.firstFab {
+  bottom: 20px !important;
+}
+.secondFab {
+  bottom: 85px !important;
+}
+.scroll-content {
+  padding-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+.statusTitleLabel {
+  background: gainsboro;
+  margin-left: -16px !important;
+  margin-right: -16px !important;
+  padding-left: 30px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  color: #757272;
+}
+.item-md.item-block .item-inner {
+  border-bottom: 0 !important;
+}
+
+div.profileimage {
+  padding: 3px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #06534a;
+  border-radius: 100%;
+  img {
+    height: 50px;
+    width: 58px;
+    border-radius: 100%;
+  }
+}
+div.profileimageViewed {
+  padding: 3px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  img {
+    height: 50px;
+    width: 58px;
+    border-radius: 100%;
+  }
+}
+
+.profile {
+  border: 1px solid #06534a;
+  padding: 2px;
+}

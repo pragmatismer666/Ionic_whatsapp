@@ -1,0 +1,37 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of call">
+      <div class="profileimageViewed">
+        <img src="{{item.img}}" alt="">
+      </div>
+      <ion-label style="font-weight: bold;">
+        <span style="font-size:16px; padding-left: 10px;" text-capitalize>
+          {{item.nikeName}}
+        </span>
+        <span style="float:right;font-size:12px;color:#ccc">
+          <ion-icon *ngIf="item.icon == 'call'" (click)="call(item)" class="icons" color="secondary" name="{{item.icon}}">
+          </ion-icon>
+          <ion-icon class="icons" *ngIf="item.icon == 'videocam'" (click)="videoCall(item)" color="secondary"
+            name="{{item.icon}}"></ion-icon>
+
+        </span>
+        <p style="color:#ccc; padding-left: 10px;">
+          <ion-icon *ngIf="item.call == 'misscall'" color="danger" slot="icon-only" src="assets/icon/call-received.svg">
+          </ion-icon>
+          <ion-icon *ngIf="item.call == 'call'" color="secondary" slot="icon-only" src="assets/icon/call-made.svg">
+          </ion-icon>
+          {{item.date | moment:'h:mm A'}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container>
+      <ion-fab-button (click)="callList()">
+        <ion-icon name="call" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+
+</ion-content>

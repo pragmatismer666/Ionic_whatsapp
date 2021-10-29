@@ -1,0 +1,44 @@
+<ion-content>
+    <div>
+        <div class="profileimage">
+            <img src="{{image}}" alt="">
+        </div>
+        <p style="text-align: center;">{{name}}</p>
+        <p style="text-align: center;">Calling</p>
+    </div>
+
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col>
+                <button *ngIf="showCall" ion-button block>Call</button>
+            </ion-col>
+            <ion-col>
+                <button *ngIf="showHangup" ion-button block color="danger">Hangup</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button *ngIf="showAnswer" ion-button block color="secondary">Answer</button>
+            </ion-col>
+            <ion-col>
+                <button *ngIf="showReject" ion-button block color="danger">Reject</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p *ngIf="showStatus" [innerHtml]="status"></p>
+            </ion-col>
+        </ion-row>
+        <ion-card>
+            <video src=""></video>
+            <video src=""></video>
+
+        </ion-card>
+    </ion-grid>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="danger" (click)="endCall()">
+            <ion-icon name="call"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

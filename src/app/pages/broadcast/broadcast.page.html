@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-thumbnail slot="start">
+      <img class="header" src="{{image}}" (click)="groupInfo()">
+    </ion-thumbnail>
+    <span (click)="groupInfo()" style="font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    padding-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;">
+      {{membersLength.length}} recipients
+    </span>
+    <span (click)="groupInfo()" style="padding-left: 10px;">tap here for broadcast info</span>
+    <ion-buttons slot="end">
+      <ion-button (click)="more($event)">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent class="ion-padding" fullscreen="true" class="contentBg" id="chat-parent"
+  overflow-scroll="true">
+  <div class="style" *ngIf="isLoading">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <div>
+    <div id="chat-container">
+      <div class="message-wrap">
+        <div *ngFor="let message of messagesToShow; let i = index; let first = first; let last = last" class="message">
+          <ion-col col-12 class="system" *ngIf="message.type == 'system'">
+            <p style="text-align: center;">
+              <ion-icon color="secondary" name="{{message.icon}}"></ion-icon>
+              {{message.message}} <br />
+              <span>{{message.date |  moment:'h:mm A'}}</span>
+            </p>
+          </ion-col>
+          <div class="message-right" *ngIf="message.userId === userId">
+            <div *ngIf="message.type == 'image'" (click)="optionDelete(message.key)"
+              (click)="enlargeImage(message.message)">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <img class="url" src="{{message.message}}">
+                  <span class="line-time">
+                    {{message.date |  moment:'h:mm A' }}
+                    <ion-icon slot="icon=only" name="checkmark-outline"></ion-icon>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'text'" (click)="optionDelete(message.key)">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <p class="line-breaker ">{{message.message}}</p>
+                  <span class="line-time">
+                    {{message.date |  moment:'h:mm A' }}
+                    <ion-icon slot="icon=only" name="checkmark-outline"></ion-icon>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="message.type == 'audio'">
+              <div class="msg-detail">
+                <div class="msg-info">
+                </div>
+                <div class="msg-content">
+                  <p class="line-breaker ">
+                    <span style="display: flex;">
+                      <div (click)="play(message.audio)">
+                        <ion-icon color="primary" slot="icon-only" class="play" name="play"></ion-icon>
+                      </div>
+                      <div style="margin-left: 30px;" (click)="optionDelete(message.key)">
+                        <ion-icon color="primary" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+                      </div>
+                    </span>
+                    <span class="line-time">
+                      {{message.date |  moment:'h:mm A' }}
+                      <ion-icon slot="icon=only" name="checkmark-outline"></ion-icon>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container *ngIf="message;  else running ">
+      <ion-fab-button color="secondary" (click)="sendMessage()" [disabled]="!message">
+        <ion-icon name="send" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+
+    <ng-template #running>
+      <ion-fab-button color="secondary" (click)="record()" *ngIf="!recording">
+        <ion-icon name="mic" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="secondary" (click)="stopRec()" *ngIf="recording">
+        <ion-icon name="pause-circle" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-template>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-row class="ion-no-padding; align-items-center">
+    <ion-col size="2">
+      <ion-button fill="clear" class="msg-btn" (click)="sendPhoto()">
+        <ion-icon slot="icon-only" name="images-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="10">
+      <textarea class="message-input" placeholder="Type your message" [(ngModel)]="message"></textarea>
+    </ion-col>
+  </ion-row>
+</ion-footer>

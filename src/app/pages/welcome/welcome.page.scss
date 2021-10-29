@@ -1,0 +1,35 @@
+.label {
+    text-align: center;
+    font-size: larger;
+    font-weight: 800;
+    margin: 15px;
+    color: #4d9061;
+    font-family: sans-serif;
+}
+.logo {
+    padding-top: 50px;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+   
+}
+.button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 15px;
+    bottom: 0;
+}
+.content {
+    left: 0;
+    right: 0;
+    margin: 15px;
+    bottom: 70px;
+    position: absolute;
+    p {
+        text-align: center;
+        a {
+            color: #428cff;
+        }
+    }
+}

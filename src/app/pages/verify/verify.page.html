@@ -1,0 +1,33 @@
+<ion-content class="ion-padding">
+    <div class="label">
+        <ion-label>Profile info</ion-label>
+    </div>
+    <p class="p">
+        Please provide your name and an optional profile photo
+    </p>
+    
+    <div class="profileimage" *ngIf="image === 'assets/profile.png'">
+        <img src="assets/camera.png" alt="" (click)="cameraOption()">
+    </div>
+    <div class="profileimage" *ngIf="image != 'assets/profile.png'">
+        <img src="{{image}}" alt="" (click)="cameraOption()">
+    </div>
+
+    <div style="padding-top: 50px;">
+        <form [formGroup]="name">
+            <ion-item>
+                <ion-input formControlName="updateName" value={{nikeName}} type="text" placeholder="Type your name here" [(ngModel)]="nikeName"></ion-input>
+                <ion-icon slot="end" src="assets/smile.svg"></ion-icon>
+            </ion-item>
+        </form>
+       
+    </div>
+
+    <div class="button">
+        <ion-button expand="block" (click)="update()" [disabled]="!name.valid">
+            NEXT
+        </ion-button>
+    </div>
+
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border" no-border>
+  <ion-toolbar>
+    <ion-title>WhatsApp</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button cache-view="false">
+        <ion-icon name="search"></ion-icon>
+      </ion-button> -->
+      <ion-button cache-view="false" (click)="showPopover($event)">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <!-- <preferences slot="end"></preferences> -->
+</ion-header>
+<super-tabs activeTabIndex="1" #superTabs (tabChange)="onTabChange($event)">
+  <super-tabs-toolbar slot="top">
+    <super-tab-button class="marging">
+      <ion-icon name="camera"></ion-icon>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label>CHATS</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label>STATUS</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label>CALLS</ion-label>
+    </super-tab-button>
+  </super-tabs-toolbar>
+
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="camera"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="chat"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="status"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="calls"></ion-nav>
+      </ion-content>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>
